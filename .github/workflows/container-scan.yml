@@ -13,7 +13,7 @@ jobs:
       - name: Install the scanner
         run: |
           curl -fsSL -o sonar-container-scanner \
-            "https://binaries.sonarsource.com/CommercialDistribution/sonar-container-scanner/sonar-container-scanner-<version>-linux-x64.bin"
+            "https://binaries.sonarsource.com/CommercialDistribution/sonar-container-scanner/sonar-container-scanner-0.3.0.10152-linux-x64.bin"
           chmod +x sonar-container-scanner
           sudo mv sonar-container-scanner /usr/local/bin/
 
