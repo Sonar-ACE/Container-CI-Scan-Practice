@@ -1,0 +1,31 @@
+name: Container scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull the practice image
+        run: docker pull alpine:3.19
+
+      - name: Install the scanner
+        run: |
+          curl -fsSL -o sonar-container-scanner \
+            "https://binaries.sonarsource.com/CommercialDistribution/sonar-container-scanner/sonar-container-scanner-<version>-linux-x64.bin"
+          chmod +x sonar-container-scanner
+          sudo mv sonar-container-scanner /usr/local/bin/
+
+      - name: Cache the scanner tools
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/sonar-container-scanner
+          key: sonar-container-scanner-${{ runner.os }}
+
+      - name: Scan the local image
+        env:
+          SONAR_CONTAINER_SCANNER_ORG: ${{ secrets.SONAR_CONTAINER_SCANNER_ORG }}
+          SONAR_CONTAINER_SCANNER_TOKEN: ${{ secrets.SONAR_CONTAINER_SCANNER_TOKEN }}
+          SONAR_CONTAINER_SCANNER_CACHE_DIR: ${{ runner.temp }}/sonar-container-scanner
+        run: sonar-container-scanner alpine:3.19 --fail-on high
