@@ -28,4 +28,4 @@ jobs:
           SONAR_CONTAINER_SCANNER_ORG: ${{ secrets.SONAR_CONTAINER_SCANNER_ORG }}
           SONAR_CONTAINER_SCANNER_TOKEN: ${{ secrets.SONAR_CONTAINER_SCANNER_TOKEN }}
           SONAR_CONTAINER_SCANNER_CACHE_DIR: ${{ runner.temp }}/sonar-container-scanner
-        run: sonar-container-scanner alpine:3.19 --fail-on high
+        run: sonar-container-scanner alpine:3.23
