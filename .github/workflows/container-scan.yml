@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pull the practice image
-        run: docker pull alpine:3.19
+        run: docker pull alpine:3.23
 
       - name: Install the scanner
         run: |
